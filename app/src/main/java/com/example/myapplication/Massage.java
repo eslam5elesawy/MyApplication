@@ -2,15 +2,17 @@ package com.example.myapplication;
 
 public class Massage {
 
-    int time;
-    String massage;
+    private int time;
+    private String massage;
+    private String UserID;
 
     public Massage() {
     }
 
-    public Massage(int time, String massage) {
+    public Massage(int time, String massage,String UserID) {
         this.time = time;
         this.massage = massage;
+        this.UserID = UserID;
     }
 
     public int getTime() {
@@ -27,5 +29,13 @@ public class Massage {
 
     public void setMassage(String massage) {
         this.massage = massage;
+    }
+
+    public String getUserID() {
+        return UserID;
+    }
+
+    public void setUserID(String userID) {
+        UserID = userID;
     }
 }
