@@ -28,16 +28,18 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<Massage> massage = new ArrayList<>();
     private FirebaseAuth mAuth;
     private FirebaseUser mCurrentUser;
-    DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference childRef = rootRef.child("chat");
+    private DatabaseReference rootRef;
+    private DatabaseReference childRef;
 
-    RecycleViewAdaptor adaptor;
+    private RecycleViewAdaptor adaptor;
 
-    ImageButton btn ;
-    EditText ed;
+    private ImageButton btn ;
+    private EditText ed;
+
+    private ArrayList<Massage> massage = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser=mAuth.getCurrentUser();
+        rootRef = FirebaseDatabase.getInstance().getReference();
+        childRef  = rootRef.child(mCurrentUser.getUid());
 
         btn=findViewById(R.id.button);
         ed= findViewById(R.id.editText);
@@ -85,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if(mCurrentUser ==null){
-            sendToLogin();
+           // sendToLogin();
         }
     }
     private void sendToLogin(){
