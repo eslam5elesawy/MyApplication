@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         rootRef = FirebaseDatabase.getInstance().getReference();
-<<<<<<< HEAD
         childRef = rootRef.child("NonUser");
+
         mAuth.signInWithEmailAndPassword("eslam5@gmail.com","12341234")
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -61,17 +61,15 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             mCurrentUser = mAuth.getCurrentUser();
                             childRef = rootRef.child("U"+mAuth.getUid());
-                            Toast.makeText(MainActivity.this, "user"+mAuth.getUid(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "user \n"+mAuth.getUid(), Toast.LENGTH_SHORT).show();
                         }else{
                             childRef = rootRef.child("NonUser");
-                            Toast.makeText(MainActivity.this, "user"+mAuth.getUid(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "no user", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
-=======
-//        childRef  = rootRef.child(mCurrentUser.getUid());
->>>>>>> 795bca391b9b0a6312c77a94de3a1dc324d777de
+
 
         btn=findViewById(R.id.button);
         ed= findViewById(R.id.editText);
@@ -79,9 +77,11 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                massage.add(new Massage(massage.size(),ed.getText().toString(),mCurrentUser.getUid()));
-                ed.setText("");
-                childRef.setValue(massage);
+                if (!ed.getText().toString().equals("")) {
+                    massage.add(new Massage(massage.size(), ed.getText().toString(), mCurrentUser.getUid()));
+                    ed.setText("");
+                    childRef.setValue(massage);
+                }
             }
         });
 
@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(dataSnapshot.getValue() != "") {
                     massage.clear();
+                    Toast.makeText(MainActivity.this, "user \n"+mAuth.getUid(), Toast.LENGTH_SHORT).show();
                     for (DataSnapshot dataSnap:dataSnapshot.getChildren()){
                         massage.add(dataSnap.getValue(Massage.class));
                     }
