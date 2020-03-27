@@ -13,7 +13,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -46,13 +51,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
-
-        mAuth.signInWithEmailAndPassword("eslam5@gmail.com","12341234");
-
-        mCurrentUser=mAuth.getCurrentUser();
-
         rootRef = FirebaseDatabase.getInstance().getReference();
-        childRef  = rootRef.child(mCurrentUser.getUid());
+        childRef = rootRef.child("NonUser");
+        mAuth.signInWithEmailAndPassword("eslam5@gmail.com","12341234")
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            mCurrentUser = mAuth.getCurrentUser();
+                            childRef = rootRef.child("U"+mAuth.getUid());
+                            Toast.makeText(MainActivity.this, "user"+mAuth.getUid(), Toast.LENGTH_SHORT).show();
+                        }else{
+                            childRef = rootRef.child("NonUser");
+                            Toast.makeText(MainActivity.this, "user"+mAuth.getUid(), Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
+
 
         btn=findViewById(R.id.button);
         ed= findViewById(R.id.editText);
@@ -66,13 +82,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
         childRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                if(dataSnapshot.getValue() !=null) {
+                if(dataSnapshot.getValue() != "") {
                     massage.clear();
                     for (DataSnapshot dataSnap:dataSnapshot.getChildren()){
                         massage.add(dataSnap.getValue(Massage.class));
