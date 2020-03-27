@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
                         }else{
                             childRef = rootRef.child("NonUser");
                             Toast.makeText(MainActivity.this, "user"+mAuth.getUid(), Toast.LENGTH_SHORT).show();
-
                         }
                     }
                 });
