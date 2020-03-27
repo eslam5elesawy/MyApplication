@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Phone Number Authentication</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="we_have_sent_you_an_otp_n_for_phone_number_verification">We have sent you an OTP   for phone number verification</string>
+    <string name="verify_otp">Verify OTP</string>
+    <string name="working">Working . . .</string>
+    <string name="todo">TODO</string>
+    <string name="verify_your_number">Verify Your Number</string>
+    <string name="please_enter_your_country_code_n_and_phone_number_for_verification">Please enter your Country Code   and Phone number for verification</string>
+    <string name="_91">+91</string>
+    <string name="generate_otp">Generate OTP</string>
+    <string name="your_phone_number">Your Phone Number</string>
+    <string name="logout">Logout</string>
+    <string name="welcome_user">Welcome User</string>
+</resources>
