@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                 super.onCodeSent(s, forceResendingToken);
-                sendToOtp();
+                sendToOtp(s);
             }
         };
     }
@@ -98,10 +98,9 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-    private void sendToOtp(){
+    private void sendToOtp(String s){
         Intent intent = new Intent(LoginActivity.this, OtpActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("AuthCreate",s);
         startActivity(intent);
         finish();
     }
