@@ -46,7 +46,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
+
+        mAuth.signInWithEmailAndPassword("eslam5@gmail.com","12341234");
+
         mCurrentUser=mAuth.getCurrentUser();
+
         rootRef = FirebaseDatabase.getInstance().getReference();
 //        childRef  = rootRef.child(mCurrentUser.getUid());
 
@@ -56,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                massage.add(new Massage(massage.size(),ed.getText().toString()));
+                massage.add(new Massage(massage.size(),ed.getText().toString(),mCurrentUser.getUid()));
                 ed.setText("");
                 childRef.setValue(massage);
             }
