@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser=mAuth.getCurrentUser();
         rootRef = FirebaseDatabase.getInstance().getReference();
-        childRef  = rootRef.child(mCurrentUser.getUid());
+//        childRef  = rootRef.child(mCurrentUser.getUid());
 
         btn=findViewById(R.id.button);
         ed= findViewById(R.id.editText);
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if(mCurrentUser ==null){
+        if(mCurrentUser == null){
            // sendToLogin();
         }
     }
