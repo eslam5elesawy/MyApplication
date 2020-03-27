@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser mCurrentUser;
     private DatabaseReference rootRef;
     private DatabaseReference childRef;
-
     private RecycleViewAdaptor adaptor;
 
     private ImageButton btn ;
@@ -50,26 +49,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mAuth = FirebaseAuth.getInstance();
         rootRef = FirebaseDatabase.getInstance().getReference();
-        childRef = rootRef.child("NonUser");
+        mAuth = FirebaseAuth.getInstance();
 
-        mAuth.signInWithEmailAndPassword("eslam5@gmail.com","12341234")
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            mCurrentUser = mAuth.getCurrentUser();
-                            childRef = rootRef.child("U"+mAuth.getUid());
-                            Toast.makeText(MainActivity.this, "user \n"+mAuth.getUid(), Toast.LENGTH_SHORT).show();
-                        }else{
-                            childRef = rootRef.child("NonUser");
-                            Toast.makeText(MainActivity.this, "no user", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+        mAuth.signInWithEmailAndPassword("eslam5@gmail.com","12341234");
 
-
+        childRef = rootRef.child("U"+mAuth.getUid());
 
         btn=findViewById(R.id.button);
         ed= findViewById(R.id.editText);
@@ -78,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!ed.getText().toString().equals("")) {
-                    massage.add(new Massage(massage.size(), ed.getText().toString(), mCurrentUser.getUid()));
+                    massage.add(new Massage(massage.size(), ed.getText().toString(), mAuth.getUid()));
                     ed.setText("");
                     childRef.setValue(massage);
                 }
