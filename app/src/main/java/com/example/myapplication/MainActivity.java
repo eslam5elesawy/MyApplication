@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         rootRef = FirebaseDatabase.getInstance().getReference();
+<<<<<<< HEAD
         childRef = rootRef.child("NonUser");
         mAuth.signInWithEmailAndPassword("eslam5@gmail.com","12341234")
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -68,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+=======
+//        childRef  = rootRef.child(mCurrentUser.getUid());
+>>>>>>> 795bca391b9b0a6312c77a94de3a1dc324d777de
 
         btn=findViewById(R.id.button);
         ed= findViewById(R.id.editText);
@@ -105,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if(mCurrentUser ==null){
+        if(mCurrentUser == null){
            // sendToLogin();
         }
     }
