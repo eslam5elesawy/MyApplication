@@ -34,7 +34,7 @@ public class RecycleViewAdaptor extends RecyclerView.Adapter<RecycleViewAdaptor.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         holder.massage.setText(massages.get(position).getMassage());
-        holder.Time.setText(massages.get(position).getTime());
+        holder.Time.setText(massages.get(position).formatTime());
 
     }
 

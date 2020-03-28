@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference childRef;
     private RecycleViewAdaptor adaptor;
 
-    private ImageButton btn ;
+    private ImageButton btn;
     private EditText ed;
 
     private ArrayList<Massage> massage = new ArrayList<>();
@@ -55,24 +55,24 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-
-        mAuth.signInWithEmailAndPassword("eslam5@gmail.com","12341234");
-
-        btn=findViewById(R.id.button);
-        ed= findViewById(R.id.editText);
+        mCurrentUser = mAuth.getCurrentUser();
+        mAuth.signInWithEmailAndPassword("eslam5@gmail.com", "12341234");
+        childRef = rootRef.child( mCurrentUser.getUid());
+        btn = findViewById(R.id.button);
+        ed = findViewById(R.id.editText);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!ed.getText().toString().equals("")) {
 
-         Date dateMassage =new Date();
+                    Date dateMassage = new Date();
 
                     massage.add(new Massage(dateMassage.toString(), ed.getText().toString(), mAuth.getUid()));
-                    Log.e("TAG", "onClick: "+dateMassage.toString());
+
                     ed.setText("");
                     childRef.setValue(massage);
-                    Log.e("TAG", "onClick: "+dateMassage.toString());
+                    Log.e("TAG", "onClick: " + dateMassage.toString());
                 }
             }
         });
@@ -81,9 +81,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                if(dataSnapshot.getValue() != "") {
+                if (dataSnapshot.getValue() != "") {
                     massage.clear();
-                    for (DataSnapshot dataSnap:dataSnapshot.getChildren()){
+                    for (DataSnapshot dataSnap : dataSnapshot.getChildren()) {
                         massage.add(dataSnap.getValue(Massage.class));
                     }
                     adaptor.notifyItemInserted(adaptor.massages.size());
@@ -99,22 +99,25 @@ public class MainActivity extends AppCompatActivity {
         });
         InRecycleView();
     }
+
     @Override
     protected void onStart() {
         super.onStart();
-        if(mCurrentUser == null){
+        if (mCurrentUser == null) {
             sendToLogin();
         }
     }
-    private void sendToLogin(){
 
-        Intent intent=new Intent(MainActivity.this,LoginActivity.class);
+    private void sendToLogin() {
+
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
     }
-    public void InRecycleView(){
+
+    public void InRecycleView() {
         RecyclerView recyclerView = findViewById(R.id.RecycleView);
         adaptor = new RecycleViewAdaptor(massage);
         recyclerView.setAdapter(adaptor);
