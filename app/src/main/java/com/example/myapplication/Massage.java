@@ -20,8 +20,6 @@ public class Massage {
     }
 
     public String getTime() {
-<<<<<<< HEAD
-<<<<<<< HEAD
 
         String t = time.substring(time.indexOf(":")-2,time.indexOf(":")+2);
 
@@ -42,10 +40,6 @@ public class Massage {
         //sb.delete(time.indexOf(":")+2,time.length());
         // new SimpleDateFormat ("hh:mm a", Locale.ENGLISH).format(new Date())
 
-=======
->>>>>>> 10b043fee165981c04607c599f77059d2a39fd45
-=======
->>>>>>> 10b043fee165981c04607c599f77059d2a39fd45
         return time;
     }
 
