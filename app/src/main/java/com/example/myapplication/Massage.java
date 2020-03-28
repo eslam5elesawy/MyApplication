@@ -36,8 +36,8 @@ public class Massage {
         return UserID;
     }
 
-    public String show() {
-        return (getMassage() + "  " + getFullTime() + " " + getUserID());
+    public void setUserID(String userID) {
+        UserID = userID;
     }
 
     public String formatTime() {
@@ -56,14 +56,6 @@ public class Massage {
         } else {
             time = HH + t.substring(2, t.length()) + " AM";
         }
-
-        //StringBuilder sb = new StringBuilder(time);
-        //sb.delete(time.indexOf(":")+2,time.length());
-        // new SimpleDateFormat ("hh:mm a", Locale.ENGLISH).format(new Date())
         return time;
-    }
-
-    public void setUserID(String userID) {
-        UserID = userID;
     }
 }

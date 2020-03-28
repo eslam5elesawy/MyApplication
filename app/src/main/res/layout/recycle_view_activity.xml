@@ -3,18 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-
 <LinearLayout
+    android:id="@+id/RV_Layout"
     android:layout_width="wrap_content"
     android:minWidth="70sp"
     android:layout_height="wrap_content"
-    android:layout_alignParentEnd="true"
+    android:layout_alignParentStart="true"
     android:orientation="vertical"
     android:layout_marginTop="6dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginLeft="50dp"
+    android:layout_marginRight="50dp"
+    android:layout_marginLeft="10dp"
     android:background="@drawable/circle_text"
-    android:layout_alignParentRight="true">
+    android:layout_alignParentLeft="true"
+
+    android:visibility="gone"
+    >
 
     <TextView
         android:id="@+id/RV_Massage"
@@ -24,10 +27,10 @@
         android:layout_marginRight="16dp"
         android:layout_marginLeft="9dp"
         android:textColor="#000"
-        android:textAlignment="textEnd"
+        android:textAlignment="textStart"
         android:text="Massage"
         android:textSize="15sp"
-        android:layout_gravity="end" />
+        android:layout_gravity="start" />
 
     <TextView
         android:id="@+id/RV_Time"
@@ -41,8 +44,49 @@
         android:textAlignment="textEnd"
         android:textSize="9sp" />
 
-
 </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/RV_Layout_User"
+        android:layout_width="wrap_content"
+        android:minWidth="70sp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:orientation="vertical"
+        android:layout_marginTop="6dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="50dp"
+        android:background="@drawable/user_back"
+        android:layout_alignParentRight="true"
+
+        android:visibility="gone"
+        >
+
+        <TextView
+            android:id="@+id/RV_Massage_User"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="9dp"
+            android:textColor="#000"
+            android:textAlignment="textEnd"
+            android:text="Massage"
+            android:textSize="15sp"
+            android:layout_gravity="end" />
+
+        <TextView
+            android:id="@+id/RV_Time_User"
+            android:layout_width="56sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="9dp"
+            android:layout_marginRight="10dp"
+            android:paddingRight="6dp"
+            android:text="00:00 AM"
+            android:textAlignment="textEnd"
+            android:textSize="9sp" />
+
+    </LinearLayout>
 
 </RelativeLayout>

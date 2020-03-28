@@ -7,18 +7,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.Toast;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,8 +23,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,36 +32,43 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference childRef;
     private RecycleViewAdaptor adaptor;
 
-    private ImageButton btn;
-    private EditText ed;
+    private ImageButton BTN_Send;
+    private EditText ED_Massage;
+    private ImageView User_photo;
+    private TextView User_name;
 
-    private ArrayList<Massage> massage = new ArrayList<>();
+    private ArrayList<Massage> Massages_Data = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        rootRef = FirebaseDatabase.getInstance().getReference();
+
         mAuth = FirebaseAuth.getInstance();
 
         mAuth.signInWithEmailAndPassword("eslam5@gmail.com","12341234");
-
         mCurrentUser = mAuth.getCurrentUser();
 
+        rootRef = FirebaseDatabase.getInstance().getReference();
         childRef = rootRef.child(mCurrentUser.getUid());
 
-        btn=findViewById(R.id.button);
-        ed= findViewById(R.id.editText);
+        BTN_Send =findViewById(R.id.button);
+        ED_Massage = findViewById(R.id.editText);
+        User_name = findViewById(R.id.TV_Toolbar);
+        User_photo = findViewById(R.id.IV_Toolbar);
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        User_name.setText(mCurrentUser.getDisplayName());
+
+
+        BTN_Send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!ed.getText().toString().equals("")) {
+                if (!ED_Massage.getText().toString().equals("")) {
 
-                    massage.add(new Massage(new Date().toString(), ed.getText().toString(), mAuth.getUid()));
-                    ed.setText("");
-                    childRef.setValue(massage);
+                    Massages_Data.add(new Massage(new Date().toString(), ED_Massage.getText().toString(), mAuth.getUid()));
+                    ED_Massage.setText("");
+                    childRef.setValue(Massages_Data);
                 }
             }
         });
@@ -79,9 +78,9 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 if (dataSnapshot.getValue() != "") {
-                    massage.clear();
+                    Massages_Data.clear();
                     for (DataSnapshot dataSnap : dataSnapshot.getChildren()) {
-                        massage.add(dataSnap.getValue(Massage.class));
+                        Massages_Data.add(dataSnap.getValue(Massage.class));
                     }
                     adaptor.notifyItemInserted(adaptor.massages.size());
                 }
@@ -115,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void InRecycleView() {
         RecyclerView recyclerView = findViewById(R.id.RecycleView);
-        adaptor = new RecycleViewAdaptor(massage);
+        adaptor = new RecycleViewAdaptor(Massages_Data);
         recyclerView.setAdapter(adaptor);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
