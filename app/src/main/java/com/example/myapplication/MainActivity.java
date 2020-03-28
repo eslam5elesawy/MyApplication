@@ -54,11 +54,13 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         mAuth.signInWithEmailAndPassword("eslam5@gmail.com","12341234");
-        
-        btn=findViewById(R.id.button);
-        ed= findViewById(R.id.editText);
 
         mCurrentUser = mAuth.getCurrentUser();
+
+        childRef = rootRef.child(mCurrentUser.getUid());
+
+        btn=findViewById(R.id.button);
+        ed= findViewById(R.id.editText);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
