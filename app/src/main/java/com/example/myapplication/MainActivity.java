@@ -51,30 +51,13 @@ public class MainActivity extends AppCompatActivity {
 
         rootRef = FirebaseDatabase.getInstance().getReference();
 
-        childRef = rootRef.child("NonUser");
-        mAuth.signInWithEmailAndPassword("eslam5@gmail.com","12341234")
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            mCurrentUser = mAuth.getCurrentUser();
-                            childRef = rootRef.child("U"+mAuth.getUid());
-                            Toast.makeText(MainActivity.this, "user"+mAuth.getUid(), Toast.LENGTH_SHORT).show();
-                        }else{
-                            childRef = rootRef.child("NonUser");
-                            Toast.makeText(MainActivity.this, "user"+mAuth.getUid(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-
-
-//        childRef  = rootRef.child(mCurrentUser.getUid());
 
         mAuth = FirebaseAuth.getInstance();
 
+
         mAuth.signInWithEmailAndPassword("eslam5@gmail.com","12341234");
 
-        childRef = rootRef.child("U"+mAuth.getUid());
+        childRef = rootRef.child(mAuth.getUid());
 
         btn=findViewById(R.id.button);
         ed= findViewById(R.id.editText);
@@ -83,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!ed.getText().toString().equals("")) {
-                    massage.add(new Massage(massage.size(), ed.getText().toString(), mAuth.getUid()));
+                    massage.add(new Massage(massage.size()+"", ed.getText().toString(), mAuth.getUid()));
                     ed.setText("");
                     childRef.setValue(massage);
                 }
@@ -96,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(dataSnapshot.getValue() != "") {
                     massage.clear();
-                    Toast.makeText(MainActivity.this, "user \n"+mAuth.getUid(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "user \n"+mAuth.getUid(), Toast.LENGTH_SHORT).show();
                     for (DataSnapshot dataSnap:dataSnapshot.getChildren()){
                         massage.add(dataSnap.getValue(Massage.class));
                     }
@@ -116,10 +99,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if(mCurrentUser == null){
-           // sendToLogin();
+            sendToLogin();
         }
     }
     private void sendToLogin(){
+        
         Intent intent=new Intent(MainActivity.this,LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

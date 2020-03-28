@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (mCurrentUser != null) {
-            sendToHome();
+          //  sendToHome();
         }
     }
 
