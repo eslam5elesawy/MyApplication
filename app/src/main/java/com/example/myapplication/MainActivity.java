@@ -28,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,11 +51,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         rootRef = FirebaseDatabase.getInstance().getReference();
+
+
         mAuth = FirebaseAuth.getInstance();
+
 
         mAuth.signInWithEmailAndPassword("eslam5@gmail.com","12341234");
 
-        childRef = rootRef.child("U"+mAuth.getUid());
+<<<<<<< HEAD
+<<<<<<< HEAD
+        childRef = rootRef.child(""+mAuth.getUid());
+=======
+        childRef = rootRef.child(mAuth.getUid());
+>>>>>>> 10b043fee165981c04607c599f77059d2a39fd45
+=======
+        childRef = rootRef.child(mAuth.getUid());
+>>>>>>> 10b043fee165981c04607c599f77059d2a39fd45
 
         btn=findViewById(R.id.button);
         ed= findViewById(R.id.editText);
@@ -63,9 +75,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!ed.getText().toString().equals("")) {
-                    massage.add(new Massage(massage.size(), ed.getText().toString(), mAuth.getUid()));
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+                    Date dateMassage =new Date();
+
+                    massage.add(new Massage(dateMassage.toString(), ed.getText().toString(), mAuth.getUid()));
+                    Log.e("TAG", "onClick: "+dateMassage.toString());
+=======
+                    massage.add(new Massage(massage.size()+"", ed.getText().toString(), mAuth.getUid()));
+>>>>>>> 10b043fee165981c04607c599f77059d2a39fd45
+=======
+                    massage.add(new Massage(massage.size()+"", ed.getText().toString(), mAuth.getUid()));
+>>>>>>> 10b043fee165981c04607c599f77059d2a39fd45
                     ed.setText("");
                     childRef.setValue(massage);
+                    Log.e("TAG", "onClick: "+dateMassage.toString());
                 }
             }
         });
@@ -76,11 +101,19 @@ public class MainActivity extends AppCompatActivity {
 
                 if(dataSnapshot.getValue() != "") {
                     massage.clear();
-                    Toast.makeText(MainActivity.this, "user \n"+mAuth.getUid(), Toast.LENGTH_SHORT).show();
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+                Toast.makeText(MainActivity.this, "user \n"+mAuth.getUid(), Toast.LENGTH_SHORT).show();
+>>>>>>> 10b043fee165981c04607c599f77059d2a39fd45
+=======
+                Toast.makeText(MainActivity.this, "user \n"+mAuth.getUid(), Toast.LENGTH_SHORT).show();
+>>>>>>> 10b043fee165981c04607c599f77059d2a39fd45
                     for (DataSnapshot dataSnap:dataSnapshot.getChildren()){
                         massage.add(dataSnap.getValue(Massage.class));
                     }
                     adaptor.notifyItemInserted(adaptor.massages.size());
+
                 }
 
             }
@@ -96,10 +129,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if(mCurrentUser == null){
-           // sendToLogin();
+            sendToLogin();
         }
     }
     private void sendToLogin(){
+
         Intent intent=new Intent(MainActivity.this,LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

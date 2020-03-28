@@ -1,25 +1,55 @@
 package com.example.myapplication;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class Massage {
 
-    private int time;
+    private String time;
     private String massage;
     private String UserID;
 
     public Massage() {
     }
 
-    public Massage(int time, String massage,String UserID) {
+    public Massage(String time, String massage,String UserID) {
         this.time = time;
         this.massage = massage;
         this.UserID = UserID;
     }
 
-    public int getTime() {
+    public String getTime() {
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+        String t = time.substring(time.indexOf(":")-2,time.indexOf(":")+2);
+
+        int HH = Integer.parseInt(t.charAt(0)+""+t.charAt(1));
+
+        if (HH > 12){
+            HH = HH - 12;
+            time = HH + t.substring(2,t.length())+" PM";
+        }else if (HH == 12){
+            time = HH + t.substring(2,t.length())+" PM";
+        }else if (HH == 0){
+            time = 12 + t.substring(2,t.length())+" AM";
+        }else {
+            time = HH + t.substring(2,t.length())+" AM";
+        }
+
+        //StringBuilder sb = new StringBuilder(time);
+        //sb.delete(time.indexOf(":")+2,time.length());
+        // new SimpleDateFormat ("hh:mm a", Locale.ENGLISH).format(new Date())
+
+=======
+>>>>>>> 10b043fee165981c04607c599f77059d2a39fd45
+=======
+>>>>>>> 10b043fee165981c04607c599f77059d2a39fd45
         return time;
     }
 
-    public void setTime(int time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

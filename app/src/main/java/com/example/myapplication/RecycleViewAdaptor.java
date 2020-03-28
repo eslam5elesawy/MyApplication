@@ -34,6 +34,7 @@ public class RecycleViewAdaptor extends RecyclerView.Adapter<RecycleViewAdaptor.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         holder.massage.setText(massages.get(position).getMassage());
+        holder.Time.setText(massages.get(position).getTime());
 
     }
 
@@ -46,14 +47,16 @@ public class RecycleViewAdaptor extends RecyclerView.Adapter<RecycleViewAdaptor.
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
+        TextView User;
         TextView massage;
         TextView Time;
-        TextView User;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             massage = itemView.findViewById(R.id.RV_Massage);
+            Time = itemView.findViewById(R.id.RV_Time);
 
         }
     }

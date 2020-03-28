@@ -1,26 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+<LinearLayout
     android:layout_width="wrap_content"
+    android:minWidth="70sp"
     android:layout_height="wrap_content"
-    >
+    android:layout_alignParentEnd="true"
+    android:orientation="vertical"
+    android:layout_marginTop="6dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="50dp"
+    android:background="@drawable/circle_text"
+    android:layout_alignParentRight="true">
 
     <TextView
         android:id="@+id/RV_Massage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:layout_marginTop="5dp"
-        android:layout_marginRight="9dp"
-        android:layout_marginLeft="50dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingRight="15dp"
-        android:paddingLeft="15dp"
-        android:background="@drawable/circle_text"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="9dp"
         android:textColor="#000"
         android:textAlignment="textEnd"
-        android:textSize="60px"
+        android:text="Massage"
+        android:textSize="15sp"
         android:layout_gravity="end" />
+
+    <TextView
+        android:id="@+id/RV_Time"
+        android:layout_width="56sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="9dp"
+        android:layout_marginRight="10dp"
+        android:paddingRight="6dp"
+        android:text="00:00 AM"
+        android:textAlignment="textEnd"
+        android:textSize="9sp" />
+
+
+</LinearLayout>
+
 
 </RelativeLayout>
