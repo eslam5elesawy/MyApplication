@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,8 +21,8 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import java.util.concurrent.TimeUnit;
 
 public class LoginActivity extends AppCompatActivity {
-    private TextView mCountryNumber;
-    private TextView mPhoneNumber;
+    private EditText mCountryNumber;
+    private EditText mPhoneNumber;
     private Button mGenerateBtn;
     private ProgressBar mLoginProgressBar;
     private TextView LoginFeedBack;
@@ -43,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String country = mCountryNumber.getText().toString();
                 String phone = mPhoneNumber.getText().toString();
-                String phoneNumber="+"+country+""+phone;
+                String phoneNumber = "+" + country + "" + phone;
                 if (!TextUtils.isEmpty(phone) && !TextUtils.isEmpty(country)) {
                     LoginFeedBack.setVisibility(View.VISIBLE);
                     mLoginProgressBar.setVisibility(View.VISIBLE);
@@ -64,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-        mCallbacks=new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+        mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             @Override
             public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
 
@@ -87,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (mCurrentUser != null) {
-          //  sendToHome();
+            //  sendToHome();
         }
     }
 
@@ -98,9 +99,10 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-    private void sendToOtp(String s){
+
+    private void sendToOtp(String s) {
         Intent intent = new Intent(LoginActivity.this, OtpActivity.class);
-        intent.putExtra("AuthCreate",s);
+        intent.putExtra("AuthCreate", s);
         startActivity(intent);
         finish();
     }
