@@ -12,15 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
-public class RecycleViewAdaptor extends RecyclerView.Adapter<RecycleViewAdaptor.ViewHolder> {
+public class MassageAdaptor extends RecyclerView.Adapter<MassageAdaptor.ViewHolder> {
 
     public ArrayList<Massage> massages;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();;
 
-    RecycleViewAdaptor(ArrayList<Massage> massages) {
+    MassageAdaptor(ArrayList<Massage> massages) {
         this.massages = massages;
     }
 
@@ -28,7 +26,7 @@ public class RecycleViewAdaptor extends RecyclerView.Adapter<RecycleViewAdaptor.
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_activity,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycleveiw_massage,parent,false);
         ViewHolder holder= new ViewHolder(view);
 
         return holder;

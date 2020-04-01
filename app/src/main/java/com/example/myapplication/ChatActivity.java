@@ -24,13 +24,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity {
+public class ChatActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseUser mCurrentUser;
     private DatabaseReference rootRef;
     private DatabaseReference childRef;
-    private RecycleViewAdaptor adaptor;
+    private MassageAdaptor adaptor;
 
     private ImageButton BTN_Send;
     private EditText ED_Massage;
@@ -42,16 +42,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_chat);
 
 
         mAuth = FirebaseAuth.getInstance();
-
-        mAuth.signInWithEmailAndPassword("eslam5@gmail.com","12341234");
         mCurrentUser = mAuth.getCurrentUser();
 
         rootRef = FirebaseDatabase.getInstance().getReference();
-        childRef = rootRef.child(mCurrentUser.getUid());
+        childRef = rootRef.child(mCurrentUser.getUid()).child("dIVGZUyhFvgJ1O1Nd0utFdOuA592");
 
         BTN_Send =findViewById(R.id.button);
         ED_Massage = findViewById(R.id.editText);
@@ -92,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        InRecycleView();
+        InChatRecycleView();
     }
 
     @Override
@@ -105,16 +103,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void sendToLogin() {
 
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        Intent intent = new Intent(ChatActivity.this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
     }
 
-    public void InRecycleView() {
-        RecyclerView recyclerView = findViewById(R.id.RecycleView);
-        adaptor = new RecycleViewAdaptor(Massages_Data);
+    public void InChatRecycleView() {
+        RecyclerView recyclerView = findViewById(R.id.Chat_RecycleView);
+        adaptor = new MassageAdaptor(Massages_Data);
         recyclerView.setAdapter(adaptor);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
