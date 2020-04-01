@@ -50,54 +50,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        rootRef = FirebaseDatabase.getInstance().getReference();
-
-
         mAuth = FirebaseAuth.getInstance();
-
         mCurrentUser = mAuth.getCurrentUser();
-        mAuth.signInWithEmailAndPassword("eslam5@gmail.com", "12341234");
-        childRef = rootRef.child( mCurrentUser.getUid());
-        btn = findViewById(R.id.button);
-        ed = findViewById(R.id.editText);
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!ed.getText().toString().equals("")) {
-
-                    Date dateMassage = new Date();
-
-                    massage.add(new Massage(dateMassage.toString(), ed.getText().toString(), mAuth.getUid()));
-
-                    ed.setText("");
-                    childRef.setValue(massage);
-                    Log.e("TAG", "onClick: " + dateMassage.toString());
-                }
-            }
-        });
-
-        childRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                if (dataSnapshot.getValue() != "") {
-                    massage.clear();
-                    for (DataSnapshot dataSnap : dataSnapshot.getChildren()) {
-                        massage.add(dataSnap.getValue(Massage.class));
-                    }
-                    adaptor.notifyItemInserted(adaptor.massages.size());
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        InRecycleView();
     }
 
     @Override
