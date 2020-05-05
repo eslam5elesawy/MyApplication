@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_margin="10dp">
+
+    <ImageView
+        android:id="@+id/RV_IV_Contacts"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:src="@drawable/profile_image" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/RV_TV_Contacts_Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textSize="25sp"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:text="contact name " />
+
+        <TextView
+            android:id="@+id/RV_TV_Contacts_Phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textSize="20sp"
+            android:text="contact phone " />
+
+
+    </LinearLayout>
+
+</LinearLayout>

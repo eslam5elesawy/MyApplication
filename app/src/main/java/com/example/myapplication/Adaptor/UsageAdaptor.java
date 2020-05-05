@@ -1,16 +1,16 @@
-package com.example.myapplication;
+package com.example.myapplication.Adaptor;
 
-import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.myapplication.Model.UserData;
+import com.example.myapplication.R;
 
 import java.util.ArrayList;
 
@@ -18,7 +18,7 @@ public class UsageAdaptor extends RecyclerView.Adapter<UsageAdaptor.ViewHolder> 
 
     public ArrayList<UserData> Usage;
 
-    UsageAdaptor(ArrayList<UserData> Usage) {
+    public UsageAdaptor(ArrayList<UserData> Usage) {
         this.Usage = Usage;
     }
 
@@ -35,7 +35,7 @@ public class UsageAdaptor extends RecyclerView.Adapter<UsageAdaptor.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull UsageAdaptor.ViewHolder holder, int position) {
 
-        holder.UserName.setText(Usage.get(position).getName());
+        holder.UserName.setText(Usage.get(position).getUserID());
        // holder.UserPhoto.setImageURI(Usage.get(position).getPhoto());
 
     }

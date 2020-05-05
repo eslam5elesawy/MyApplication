@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Adaptor;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.Model.Massage;
+import com.example.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -18,7 +20,7 @@ public class MassageAdaptor extends RecyclerView.Adapter<MassageAdaptor.ViewHold
     public ArrayList<Massage> massages;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();;
 
-    MassageAdaptor(ArrayList<Massage> massages) {
+    public MassageAdaptor(ArrayList<Massage> massages) {
         this.massages = massages;
     }
 

@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Model;
 
 public class UserData {
 
@@ -9,10 +9,8 @@ public class UserData {
     public UserData() {
     }
 
-    public UserData(String userID, String name, String photo) {
+    public UserData(String userID) {
         this.userID = userID;
-        this.name = name;
-        this.photo = photo;
     }
 
     public String getUserID() {
@@ -23,7 +21,7 @@ public class UserData {
         this.userID = userID;
     }
 
-    public String getName() {
+    public String getName(){
 
         return name;
     }
@@ -39,6 +37,5 @@ public class UserData {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
-
 
 }
